@@ -1,0 +1,47 @@
+{% extends 'course-info-base.html' %}
+
+{% block title %}课程章节信息 - 慕学在线网{% endblock %}
+
+{% block custom_bread %}
+    <section>
+        <div class="wp">
+            <ul class="crumbs">
+                <li><a href="{% url 'index' %}">首页</a>></li>
+                <li><a href="{% url 'course:list' %}">公开课</a>></li>
+                <li><a href="{% url 'course:detail' course.id %}">课程详情</a>></li>
+                <li>章节信息</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block info %}
+    <div id="notice" class="clearfix">
+        <div class="l"><strong>课程公告:</strong> <a
+                href="javascript:void(0)">Spring的文档以及相关的jar文件已上传</a>
+        </div>
+    </div>
+
+    <div class="mod-chapters">
+        {% for lesson in course.lessons %}
+            <div class="chapter chapter-active">
+                <h3>
+                    <strong><i class="state-expand"></i>{{ lesson.name }}</strong>
+                </h3>
+                <ul class="video">
+                    {% for video in lesson.videos %}
+                        <li>
+                            <a target="_blank" href='{{ video.url }}'
+                               class="J-media-item studyvideo">
+                                {{ video.name }}({{ video.learn_times }}分钟)<i
+                                    class="study-state"></i>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block custom_js %}{% endblock %}
